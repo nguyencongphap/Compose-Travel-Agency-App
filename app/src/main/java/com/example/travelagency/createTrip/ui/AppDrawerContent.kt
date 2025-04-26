@@ -101,7 +101,7 @@ fun AppDrawerContent(
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun Preview() {
     AppDrawerContent(
         navigateTo = {},
         modifier = Modifier
