@@ -61,6 +61,9 @@ class MainActivity : ComponentActivity() {
                                 composable<Route.AllUsersScreen> {
                                     Text("All Users Screen", modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.titleLarge)
                                 }
+                                composable<Route.AiTripsScreen> {
+                                    Text("Ai Trip Screen", modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.titleLarge)
+                                }
                             }
 
                         }

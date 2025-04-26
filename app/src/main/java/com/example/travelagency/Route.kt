@@ -13,4 +13,6 @@ sealed interface Route {
     data object DashboardScreen: Route
     @Serializable
     data object AllUsersScreen: Route
+    @Serializable
+    data object AiTripsScreen: Route
 }
