@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +22,7 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.example.travelagency.core.ui.Drawer
 import com.example.travelagency.createTrip.ui.AppDrawerContent
+import com.example.travelagency.createTrip.ui.dashboard.DashboardScreenRoot
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -46,7 +48,11 @@ class MainActivity : ComponentActivity() {
                         AppDrawerContent(navigateTo = it)
                     }
                 ) { innerPadding ->
-                    Box(modifier = Modifier.padding(innerPadding)) {
+                    Box(modifier = Modifier
+                        .padding(innerPadding)
+                        .padding(horizontal = 4.dp)
+                        .fillMaxWidth()
+                    ) {
                         NavHost(
                             navController = navController,
                             startDestination = Route.CreateTripGraph
@@ -56,7 +62,7 @@ class MainActivity : ComponentActivity() {
                                 startDestination = Route.DashboardScreen
                             ) {
                                 composable<Route.DashboardScreen>() {
-                                    Text("Dashboard Screen", modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.titleLarge)
+                                    DashboardScreenRoot()
                                 }
                                 composable<Route.AllUsersScreen> {
                                     Text("All Users Screen", modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.titleLarge)

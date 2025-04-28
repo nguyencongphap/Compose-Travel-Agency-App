@@ -2,6 +2,7 @@ package com.example.travelagency.createTrip.ui.dashboard.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,61 +29,64 @@ import com.example.travelagency.core.ui.ValidGreen
 
 @Composable
 fun StatsCard(
+    title: String,
     count: Int,
     percentage: Int,
     isIncrement: Boolean,
     modifier: Modifier = Modifier
 ) {
-    ElevatedCard(
-        modifier = modifier,
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 6.dp
-        )
+    Box(
+        modifier = modifier
     ) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Text(text = "Total Users", style = MaterialTheme.typography.bodyMedium)
-            Spacer(Modifier.height(24.dp))
+        ElevatedCard(
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 6.dp
+            )
+        ) {
+            Column(modifier = Modifier.padding(8.dp)) {
+                Text(text = title, style = MaterialTheme.typography.bodyMedium)
+                Spacer(Modifier.height(24.dp))
 
-            Row(
-                verticalAlignment = Alignment.Bottom,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Column {
-                    Text(text = formatNumberWithCommas(count), style = MaterialTheme.typography.displaySmall)
-                    Spacer(Modifier.height(16.dp))
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Image(
-                            painter = painterResource(if (isIncrement) R.drawable.arrow_up_green else R.drawable.arrow_down_red),
-                            contentDescription = "",
-                            modifier = Modifier.size(14.dp)
-                        )
-                        Spacer(modifier.width(2.dp))
-                        Text(
-                            text = "$percentage%",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = if (isIncrement) ValidGreen else ErrorRed
-                        )
-                        Spacer(modifier.width(4.dp))
-                        Text(
-                            text = "vs last month",
-                            style = MaterialTheme.typography.bodySmall,
-                            modifier = Modifier.alpha(0.5f)
-                        )
+                Row(
+                    verticalAlignment = Alignment.Bottom,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column {
+                        Text(text = formatNumberWithCommas(count), style = MaterialTheme.typography.displaySmall)
+                        Spacer(Modifier.height(16.dp))
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Image(
+                                painter = painterResource(if (isIncrement) R.drawable.arrow_up_green else R.drawable.arrow_down_red),
+                                contentDescription = "",
+                                modifier = Modifier
+                                    .size(14.dp)
+                            )
+                            Spacer(modifier.width(2.dp))
+                            Text(
+                                text = "$percentage%",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = if (isIncrement) ValidGreen else ErrorRed
+                            )
+                            Spacer(modifier.width(4.dp))
+                            Text(
+                                text = "vs last month",
+                                style = MaterialTheme.typography.bodySmall,
+                                modifier = Modifier.alpha(0.5f)
+                            )
+                        }
                     }
+                    Spacer(Modifier.width(20.dp))
+                    Image(
+                        painter = painterResource(if (isIncrement) R.drawable.increment else R.drawable.decrement),
+                        contentDescription = "increment graph icon",
+                        modifier = Modifier
+                            .width(130.dp),
+                        contentScale = ContentScale.FillWidth
+                    )
                 }
-                Spacer(Modifier.width(20.dp))
-                Image(
-                    painter = painterResource(if (isIncrement) R.drawable.increment else R.drawable.decrement),
-                    contentDescription = "increment graph icon",
-                    modifier = Modifier
-                        .width(130.dp),
-                    contentScale = ContentScale.FillWidth
-                )
             }
-
-
         }
     }
 }
@@ -92,6 +96,7 @@ fun StatsCard(
 fun Preview() {
     StatsCard(
         modifier = Modifier,
+        title = "Total Users",
         count = 12490,
         percentage = 12,
         isIncrement = false
